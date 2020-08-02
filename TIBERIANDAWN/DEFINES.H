@@ -35,6 +35,8 @@
 #define DEFINES_H
 
 
+#define VMSBIGOT_PREDATOR_MOD
+
 //#define PETROGLYPH_EXAMPLE_MOD
 
 /**********************************************************************
@@ -798,6 +800,10 @@ typedef enum BulletType : char {
 	BULLET_NUKE_LOB,		// Nuke projectile
 #endif //PETROGLYPH_EXAMPLE_MOD
 
+#ifdef VMSBIGOT_PREDATOR_MOD
+	BULLET_PREDATOR,
+#endif
+
 	BULLET_COUNT,
 	BULLET_FIRST=0
 } BulletType;
@@ -979,6 +985,10 @@ typedef enum InfantryType : char {
 	INFANTRY_E5,				// Chemical thrower equipped.
 	INFANTRY_E7,				// Engineer.
 	INFANTRY_RAMBO,			// Commando.
+
+#ifdef VMSBIGOT_PREDATOR_MOD
+	INFANTRY_PREDATOR,			// Predator!
+#endif
 
 	INFANTRY_C1,				// Civilian
 	INFANTRY_C2,				// Civilian
@@ -1834,6 +1844,10 @@ typedef enum WeaponType : char {
 	WEAPON_NUKE_LOB,
 #endif PETROGLYPH_EXAMPLE_MOD
 			
+#ifdef VMSBIGOT_PREDATOR_MOD
+	WEAPON_PREDATOR,
+#endif	
+
 	WEAPON_COUNT
 } WeaponType;
 

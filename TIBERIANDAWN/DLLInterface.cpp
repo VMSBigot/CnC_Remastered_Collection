@@ -3136,6 +3136,14 @@ void DLLExportClass::DLL_Draw_Intercept(int shape_number, int x, int y, int widt
 			InfantryClass* infantry = static_cast<InfantryClass*>(object);
 			new_object.ControlGroup = infantry->Group;
 			new_object.CanPlaceBombs = infantry->Class->Type == INFANTRY_RAMBO;
+
+#ifdef VMSBIGOT_PREDATOR_MOD			
+			if (infantry->Class->Type == INFANTRY_PREDATOR)
+			{
+				new_object.CanPlaceBombs = true;
+				new_object.OverrideDisplayName = "Predator";
+			}
+#endif		
 		}
 
 		new_object.CanHarvest = false;

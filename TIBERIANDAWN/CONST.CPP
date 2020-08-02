@@ -99,6 +99,10 @@ WeaponTypeClass const Weapons[WEAPON_COUNT] = {
 #ifdef PETROGLYPH_EXAMPLE_MOD
 	{BULLET_NUKE_LOB,		150,	130,	0x0B00,	VOC_NUKE_LOB,	ANIM_MUZZLE_FLASH},	//	WEAPON_NUKE_LOB
 #endif //PETROGLYPH_EXAMPLE_MOD
+
+#ifdef VMSBIGOT_PREDATOR_MOD
+		{BULLET_PREDATOR,			200,	15,	0x0780,	VOC_LASER,	ANIM_NONE},				//	WEAPON_PREDATOR_LASER
+#endif
 };
 
 
@@ -121,6 +125,10 @@ WarheadTypeClass const Warheads[WARHEAD_COUNT] = {
 	{255,false,false,false,{0x100, 0x01, 0x01, 0x01, 0x01}},	//	WARHEAD_SPORE
 	{  1, true,true,false,{0x100, 0xC0, 0x80, 0x20, 0x08}},		//	WARHEAD_HEADBUTT
 	{  1, true,true,false,{0x100, 0xC0, 0x80, 0x20, 0x08}},		//	WARHEAD_FEEDME
+
+//#ifdef VMSBIGOT_PREDATOR_MOD
+//	{  4,false,false,false,{0x100, 0x100, 0x100, 0x100, 0x100}},//	WARHEAD_LASER				Light Amplification of Stimulated Emission by Radiation.
+//#endif
 };
 
 

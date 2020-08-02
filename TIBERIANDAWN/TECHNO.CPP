@@ -2149,9 +2149,15 @@ FireErrorType TechnoClass::Can_Fire(TARGET target, int which) const
 	/*
 	**	If cloaked, then firing is disabled.
 	*/
+#ifdef VMSBIGOT_PREDATOR_MOD
+	if (!CanFireCloaked && Cloak != UNCLOAKED) {
+		return(FIRE_CLOAKED);
+	}
+#else
 	if (Cloak != UNCLOAKED) {
 		return(FIRE_CLOAKED);
 	}
+#endif
 
 	return(FIRE_OK);
 }
@@ -2478,6 +2484,44 @@ BulletClass * TechnoClass::Fire_At(TARGET target, int which)
 		}
 		new SmudgeClass(Random_Pick(SMUDGE_SCORCH1, SMUDGE_SCORCH6), As_Coord(target));
 	}
+
+#ifdef VMSBIGOT_PREDATOR_MOD
+	if (weapon->Fires == BULLET_PREDATOR) {
+		int x, y, x1, y1;
+		COORDINATE source, dest;
+		source = Fire_Coord(which);
+		dest = As_Coord(target);
+		if (SpecialDialog == SDLG_NONE) {
+			Map.Coord_To_Pixel(source, x, y);
+			Map.Coord_To_Pixel(dest, x1, y1);
+			x += Map.TacPixelX;
+			x1 += Map.TacPixelX;
+			y += Map.TacPixelY;
+			y1 += Map.TacPixelY;
+			Lines[0][0] = x + 1;
+			Lines[0][1] = y;
+			Lines[0][2] = x1;
+			Lines[0][3] = y1;
+			Lines[0][4] = 0x3D;
+			Lines[1][0] = x - 1;
+			Lines[1][1] = y;
+			Lines[1][2] = x1;
+			Lines[1][3] = y1;
+			Lines[1][4] = 0x3D;
+			Lines[2][0] = x;
+			Lines[2][1] = y;
+			Lines[2][2] = x1;
+			Lines[2][3] = y1;
+			Lines[2][4] = 0x3F;
+			LineCount = 3;
+			LineFrame = 0;
+			LineMaxFrames = 5;
+			Map.Flag_To_Redraw(true);
+		}
+		new SmudgeClass(Random_Pick(SMUDGE_SCORCH1, SMUDGE_SCORCH6), As_Coord(target));
+	}
+#endif
+
 
 	return(bullet);
 }

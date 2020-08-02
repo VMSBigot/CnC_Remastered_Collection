@@ -793,6 +793,11 @@ bool HouseClass::Can_Build(StructType s, HousesType house) const
 bool HouseClass::Can_Build(InfantryType infantry, HousesType house) const
 {
 	Validate();
+	
+#ifdef VMSBIGOT_PREDATOR_MOD	
+	if (!IsHuman && infantry == INFANTRY_PREDATOR) return(false);
+
+#endif
 	return(Can_Build(&InfantryTypeClass::As_Reference(infantry), house));
 }
 

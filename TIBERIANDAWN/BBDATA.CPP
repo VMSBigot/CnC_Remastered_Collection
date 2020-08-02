@@ -362,6 +362,31 @@ static BulletTypeClass const ClassLaser(
 	ANIM_NONE					// Explosion to use upon impact.
 );
 
+#ifdef VMSBIGOT_PREDATOR_MOD
+static BulletTypeClass const ClassPredator(
+	BULLET_PREDATOR,
+	"Predator",						// NAME:			Text name of this unit type.
+	true,						// Flies over tall walls?
+	false,					// Homes in on target?
+	false,					// Projectile arcs to the target?
+	false,					// Is this a dropping bomb-like object?
+	true,						// Is this projectile invisible?
+	false,					// Will it blow up even if it gets just NEAR to target?
+	false,					// Does it have flickering flame animation?
+	false,					// Can it run out of fuel?
+	true,						// Is there no visual difference between projectile facings?
+	false,					// Is projectile inherently inaccurate?
+	false,					// Translucent colors are used?
+	true,					// Good against aircraft?
+	0,								// ARMING:		Time to arm projectile after launch.
+	0,								// RANGE:		Inherent override range factor.
+	MPH_LIGHT_SPEED,			// SPEED:		Miles per hour.
+	0,								// ROT:			Rate of turn (degrees per tick).
+	WARHEAD_LASER,				// WARHEAD:		If fires weapon, warhead type
+	ANIM_NONE					// Explosion to use upon impact.
+);
+#endif
+
 static BulletTypeClass const ClassNukeUp(
 	BULLET_NUKE_UP,
 	"ATOMICUP",					// NAME:			Text name of this unit type.
@@ -534,6 +559,9 @@ BulletTypeClass const * const BulletTypeClass::Pointers[BULLET_COUNT] = {
 	&NukeLob,			// BULLET_NUKE_LOB
 #endif //PETROGLYPH_EXAMPLE_MOD
 
+#ifdef VMSBIGOT_PREDATOR_MOD
+	&ClassPredator,
+#endif
 };
 
 

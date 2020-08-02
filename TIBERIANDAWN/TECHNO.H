@@ -71,6 +71,15 @@ class TechnoClass :	public RadioClass,
 		*/
 		unsigned IsCloakable:1;
 
+#ifdef VMSBIGOT_PREDATOR_MOD
+
+		/*
+		**  Can this unit fire while cloaked?
+		*/
+		unsigned CanFireCloaked:1;
+
+#endif
+
 		/*
 		**	If this object is designated as special then this flag will be true. For
 		**	buildings, this means that it is the primary factory. For units, it means

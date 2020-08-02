@@ -1117,6 +1117,19 @@ class InfantryTypeClass : public TechnoTypeClass
 		*/
 		unsigned IsAvoidingTiberium:1;
 
+#ifdef VMSBIGOT_PREDATOR_MOD
+		/*
+		** Is the unit capable of cloaking? 
+		*/
+		unsigned IsCloakable:1;
+
+		/*
+		** Is the unit capable of firing while cloaking?
+		*/
+		unsigned CanFireCloaked : 1;
+
+#endif
+
 		/*
 		**	This value represents the unit class. It can serve as a unique
 		**	identification number for this unit class.
@@ -1153,6 +1166,11 @@ class InfantryTypeClass : public TechnoTypeClass
 						bool is_fraidycat,
 						bool is_capture,
 						bool is_theater,
+
+#ifdef VMSBIGOT_PREDATOR_MOD
+						bool is_cloakable,
+						bool can_fire_cloaked,
+#endif
 						int ammo,
 						int *do_table,
 						int firelaunch,

@@ -1866,9 +1866,15 @@ TARGET FootClass::Greatest_Threat(ThreatType method) const
 	/*
 	**	If this object can cloak, then it won't select a target automatically.
 	*/
+#ifdef VMSBIGOT_PREDATOR_MOD
+	if (House->IsHuman && IsCloakable && !CanFireCloaked && Mission == MISSION_GUARD) {
+		return(TARGET_NONE);
+	}
+#else
 	if (House->IsHuman && IsCloakable && Mission == MISSION_GUARD) {
 		return(TARGET_NONE);
 	}
+#endif
 
 	if (Techno_Type_Class()->Primary != WEAPON_NONE && BulletTypeClass::As_Reference(Weapons[Techno_Type_Class()->Primary].Fires).IsAntiAircraft) {
 		method = method | THREAT_AIR;

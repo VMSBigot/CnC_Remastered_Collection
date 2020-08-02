@@ -251,6 +251,12 @@ InfantryClass::InfantryClass(InfantryType classid, HousesType house) :
 	} else {
 		IsSecondShot = true;
 	}
+
+#ifdef VMSBIGOT_PREDATOR_MOD
+	IsCloakable = Class->IsCloakable;
+	CanFireCloaked = Class->CanFireCloaked;
+#endif
+	
 	Doing = DO_NOTHING;
 	Fear = 0;			// Starts completely brave.
 	IsProne = false;
@@ -1123,6 +1129,19 @@ void InfantryClass::AI(void)
 			};
 			Sound_Effect(_response[Sim_Random_Pick(0, (int)(sizeof(_response) / sizeof(_response[0]))-1)], Coord);
 		}
+
+#ifdef VMSBIGOT_PREDATOR_MOD
+		if (*this == INFANTRY_PREDATOR) {
+			VocType _response[] = {
+				VOC_RAMBO_LEFTY,
+				VOC_RAMBO_LAUGH,
+				VOC_RAMBO_COMIN,
+				VOC_RAMBO_TUFF
+			};
+			Sound_Effect(_response[Sim_Random_Pick(0, (int)(sizeof(_response) / sizeof(_response[0])) - 1)], Coord);
+		}
+#endif
+
 	}
 
 	/*
@@ -2450,6 +2469,13 @@ bool InfantryClass::Unlimbo(COORDINATE coord, DirType facing)
 		House->IScan |= (1L << Class->Type);
 		House->ActiveIScan |= (1L << Class->Type);
 
+#ifdef VMSBIGOT_PREDATOR_MOD
+		/*
+		**	If it starts off the edge of the map, then it already starts cloaked.
+		*/
+		if (IsCloakable && !IsLocked) Cloak = CLOAKED;
+
+#endif
 		/*
 		**	If there is no sight range, then this object isn't discovered by the player unless
 		**	it actually appears in a cell mapped by the player.
@@ -2563,6 +2589,17 @@ void InfantryClass::Response_Select(void)
 			VOC_RAMBO_YO
 		};
 		response = _response[Sim_Random_Pick(0, (int)(sizeof(_response) / sizeof(_response[0]))-1)];
+
+#ifdef VMSBIGOT_PREDATOR_MOD
+	} else if(*this == INFANTRY_PREDATOR) {
+			static VocType _response[] = {
+				VOC_RAMBO_YEA,
+				VOC_RAMBO_YES,
+				VOC_RAMBO_YO
+			};
+			response = _response[Sim_Random_Pick(0, (int)(sizeof(_response) / sizeof(_response[0])) - 1)];		
+#endif
+	
 	} else {
 		if (Class->IsCivilian) {
 			if (*this == INFANTRY_MOEBIUS) {
@@ -2626,6 +2663,17 @@ void InfantryClass::Response_Move(void)
 			VOC_RAMBO_NOPROB
 		};
 		response = _response[Sim_Random_Pick(0, (int)(sizeof(_response) / sizeof(_response[0]))-1)];
+
+#ifdef VMSBIGOT_PREDATOR_MOD
+	} else if(*this == INFANTRY_PREDATOR) {
+			static VocType _response[] = {
+				VOC_RAMBO_UGOTIT,
+				VOC_RAMBO_ONIT,
+				VOC_RAMBO_NOPROB
+			};
+			response = _response[Sim_Random_Pick(0, (int)(sizeof(_response) / sizeof(_response[0])) - 1)];		
+#endif
+
 	} else {
 		if (Class->IsCivilian) {
 			if (*this == INFANTRY_MOEBIUS) {

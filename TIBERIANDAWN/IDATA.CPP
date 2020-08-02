@@ -114,6 +114,12 @@ static InfantryTypeClass const E1(
 	false,						// Is this a "fraidycat" run-away type infantry?
 	false,						// Can this infantry type capture a building?
 	false,						// Theater specific graphic image?
+
+#ifdef VMSBIGOT_PREDATOR_MOD
+	false,						// Is the unit capable of cloaking?
+	false,						// Can unit fire while cloaked?
+#endif
+
 	-1,							// Number of shots it has (default).
 	&MiniGunnerDos[0][0],	// Ptr to minigunner 'DO' table above
 	2,								// Frame of projectile launch.
@@ -191,6 +197,12 @@ static InfantryTypeClass const E2(
 	false,						// Is this a "fraidycat" run-away type infantry?
 	false,						// Can this infantry type capture a building?
 	false,						// Theater specific graphic image?
+
+#ifdef VMSBIGOT_PREDATOR_MOD
+	false,						// Is the unit capable of cloaking?
+	false,						// Can unit fire while cloaked?
+#endif
+
 	-1,							// Number of shots it has (default).
 	&GrenadierDos[0][0],		// Ptr to grenadier DO table (above)
 	14,							// Frame of projectile launch.
@@ -270,6 +282,12 @@ static InfantryTypeClass const E3(
 	false,						// Is this a "fraidycat" run-away type infantry?
 	false,						// Can this infantry type capture a building?
 	false,						// Theater specific graphic image?
+
+#ifdef VMSBIGOT_PREDATOR_MOD
+	false,						// Is the unit capable of cloaking?
+	false,						// Can unit fire while cloaked?
+#endif
+
 	-1,							// Number of shots it has (default).
 	&BazookaDos[0][0],		// Ptr to DO table (above)
 	3,								// Frame of projectile launch.
@@ -347,6 +365,12 @@ static InfantryTypeClass const E4(
 	false,						// Is this a "fraidycat" run-away type infantry?
 	false,						// Can this infantry type capture a building?
 	false,						// Theater specific graphic image?
+
+#ifdef VMSBIGOT_PREDATOR_MOD
+	false,						// Is the unit capable of cloaking?
+	false,						// Can unit fire while cloaked?
+#endif
+
 	-1,							// Number of shots it has (default).
 	&FlamethrowerDos[0][0],	// ptr to DO table (above)
 	2,								// Frame of projectile launch.
@@ -423,6 +447,12 @@ static InfantryTypeClass const E5(
 	false,						// Is this a "fraidycat" run-away type infantry?
 	false,						// Can this infantry type capture a building?
 	false,						// Theater specific graphic image?
+
+#ifdef VMSBIGOT_PREDATOR_MOD
+	false,						// Is the unit capable of cloaking?
+	false,						// Can unit fire while cloaked?
+#endif
+
 	-1,							// Number of shots it has (default).
 	&ChemwarriorDos[0][0],	// ptr to DO table
 	2,								// Frame of projectile launch.
@@ -499,6 +529,12 @@ static InfantryTypeClass const E7(
 	false,						// Is this a "fraidycat" run-away type infantry?
 	true,							// Can this infantry type capture a building?
 	false,						// Theater specific graphic image?
+
+#ifdef VMSBIGOT_PREDATOR_MOD
+	false,						// Is the unit capable of cloaking?
+	false,						// Can unit fire while cloaked?
+#endif
+
 	-1,							// Number of shots it has (default).
 	&EngineerDos[0][0],		// ptr to DO table
 	3,								// Frame of projectile launch.
@@ -574,6 +610,12 @@ static InfantryTypeClass const Commando(
 	false,						// Is this a "fraidycat" run-away type infantry?
 	false,							// Can this infantry type capture a building?
 	false,						// Theater specific graphic image?
+
+#ifdef VMSBIGOT_PREDATOR_MOD
+	false,						// Is the unit capable of cloaking?
+	false,						// Can unit fire while cloaked?
+#endif
+
 	-1,							// Number of shots it has (default).
 	&CommandoDos[0][0],		// ptr to DO table
 	2,								// Frame of projectile launch.
@@ -595,6 +637,84 @@ static InfantryTypeClass const Commando(
 	WEAPON_RIFLE,WEAPON_NONE,
 	MPH_SLOW_ISH			// Maximum speed of infantry.
 );
+
+#ifdef VMSBIGOT_PREDATOR_MOD
+int PredatorDos[DO_COUNT][3] = {
+	0,		1,	1,					// DO_STAND_READY
+	8,		1,	1,					// DO_STAND_GUARD
+	160,	1,	4,					// DO_PRONE
+	16,	    6,	6,					// DO_WALK
+	64,	    4,	4,					// DO_FIRE_WEAPON
+	96,	    2,	2,					// DO_LIE_DOWN
+	112,	4,	4,					// DO_CRAWL
+	144,	2,	2,					// DO_GET_UP
+	160,	4,	4,					// DO_FIRE_PRONE
+	192,	16, 0,					// DO_IDLE1
+	208,	16, 0,					// DO_IDLE2
+	224,	13, 0,					// DO_ON_GUARD
+	228,	9,	0,					// DO_FIGHT_READY
+	237,	2,	0,					// DO_PUNCH
+	239,	6,	0,					// DO_KICK
+	245,	2,	0,					// DO_PUNCH_HIT1
+	247,	4,	0,					// DO_PUNCH_HIT2
+	251,	4,	0,					// DO_PUNCH_DEATH
+	255,	2,	0,					// DO_KICK_HIT1
+	257,	4,	0,					// DO_KICK_HIT2
+	261,	5,	0,					// DO_KICK_DEATH
+	266,	5,	0,					// DO_READY_WEAPON
+	318,	8,	0,					// DO_GUN_DEATH
+	334,	8,	0,					// DO_EXPLOSION_DEATH
+	334,	8,	0,					// DO_EXPLOSION2_DEATH
+	342,	12, 0,					// DO_GRENADE_DEATH
+	354,	18, 0,					// DO_FIRE_DEATH
+	372,	3,	3,					// DO_GESTURE1
+	396,	3,	3,					// DO_SALUTE1
+	420,	3,	3,					// DO_GESTURE2
+	444,	3,	3,					// DO_SALUTE2
+	0,		1,	1,					// DO_PULL_GUN				// N/A
+	0,		1,	1,					// DO_PLEAD					// N/A
+	0,		1,  1					// DO_PLEAD_DEATH			// N/A
+};
+
+static InfantryTypeClass const Predator(
+	INFANTRY_PREDATOR,				// Infantry type number.
+	TXT_RAMBO,						// Translate name number for infantry type.
+	"RMBO",							// INI name for infantry.
+	2,								// Build level.
+	STRUCTF_BARRACKS,				// Building prerequisite.
+	false,							// Is this a female type?
+	true,							// Is a leader type?
+	true,							// Has crawling animation frames?
+	false,							// Is this a civlian?
+	false,							// Always use the given name for the infantry?
+	false,							// Is this a "fraidycat" run-away type infantry?
+	false,							// Can this infantry type capture a building?
+	false,							// Theater specific graphic image?
+	true,							// Is the unit capable of cloaking?
+	true,							// Can unit fire while cloaked?
+	-1,								// Number of shots it has (default).
+	&PredatorDos[0][0],				// ptr to DO table
+	2,								// Frame of projectile launch.
+	2,								// Frame of projectile launch while prone.
+	1000,							// Strength of infantry (in damage points).
+	5,								// Sight range.
+	100,							// Cost of infantry (in credits).
+	1,								// Scenario when they first appear.
+	80, 75,							// Risk/Reward of this infantry unit.
+	HOUSEF_MULTI1 |
+	HOUSEF_MULTI2 |
+	HOUSEF_MULTI3 |
+	HOUSEF_MULTI4 |
+	HOUSEF_MULTI5 |
+	HOUSEF_MULTI6 |
+	HOUSEF_JP |
+	HOUSEF_GOOD |
+	HOUSEF_BAD,						// Who can own this infantry unit.
+	WEAPON_PREDATOR, WEAPON_NONE,
+	MPH_FAST						// Maximum speed of infantry.
+);
+
+#endif
 
 // Civilians
 
@@ -649,6 +769,12 @@ static InfantryTypeClass const C1(
 	true,							// Is this a "fraidycat" run-away type infantry?
 	false,						// Can this infantry type capture a building?
 	false,						// Theater specific graphic image?
+
+#ifdef VMSBIGOT_PREDATOR_MOD
+	false,						// Is the unit capable of cloaking?
+	false,						// Can unit fire while cloaked?
+#endif
+
 	10,							// Number of shots it has (default).
 	&CivilianDos1[0][0],		// ptr to DO table
 	2,								// Frame of projectile launch.
@@ -724,6 +850,12 @@ static InfantryTypeClass const C2(
 	true,							// Is this a "fraidycat" run-away type infantry?
 	false,						// Can this infantry type capture a building?
 	false,						// Theater specific graphic image?
+
+#ifdef VMSBIGOT_PREDATOR_MOD
+	false,						// Is the unit capable of cloaking?
+	false,						// Can unit fire while cloaked?
+#endif
+
 	0,								// Number of shots it has (default).
 	&CivilianDos2[0][0],		// ptr to DO table
 	2,								// Frame of projectile launch.
@@ -800,6 +932,12 @@ static InfantryTypeClass const C3(
 	true,							// Is this a "fraidycat" run-away type infantry?
 	false,						// Can this infantry type capture a building?
 	false,						// Theater specific graphic image?
+
+#ifdef VMSBIGOT_PREDATOR_MOD
+	false,						// Is the unit capable of cloaking?
+	false,						// Can unit fire while cloaked?
+#endif
+
 	0,								// Number of shots it has (default).
 	&CivilianDos3[0][0],		// ptr to DO table
 	2,								// Frame of projectile launch.
@@ -876,6 +1014,12 @@ static InfantryTypeClass const C4(
 	true,							// Is this a "fraidycat" run-away type infantry?
 	false,						// Can this infantry type capture a building?
 	false,						// Theater specific graphic image?
+
+#ifdef VMSBIGOT_PREDATOR_MOD
+	false,						// Is the unit capable of cloaking?
+	false,						// Can unit fire while cloaked?
+#endif
+
 	0,								// Number of shots it has (default).
 	&CivilianDos4[0][0],		// ptr to DO table
 	2,								// Frame of projectile launch.
@@ -951,6 +1095,12 @@ static InfantryTypeClass const C5(
 	true,							// Is this a "fraidycat" run-away type infantry?
 	false,						// Can this infantry type capture a building?
 	false,						// Theater specific graphic image?
+
+#ifdef VMSBIGOT_PREDATOR_MOD
+	false,						// Is the unit capable of cloaking?
+	false,						// Can unit fire while cloaked?
+#endif
+
 	0,								// Number of shots it has (default).
 	&CivilianDos5[0][0],		// ptr to DO table
 	2,								// Frame of projectile launch.
@@ -1026,6 +1176,12 @@ static InfantryTypeClass const C6(
 	true,							// Is this a "fraidycat" run-away type infantry?
 	false,						// Can this infantry type capture a building?
 	false,						// Theater specific graphic image?
+
+#ifdef VMSBIGOT_PREDATOR_MOD
+	false,						// Is the unit capable of cloaking?
+	false,						// Can unit fire while cloaked?
+#endif
+
 	0,								// Number of shots it has (default).
 	&CivilianDos6[0][0],		// ptr to DO table
 	2,								// Frame of projectile launch.
@@ -1101,6 +1257,12 @@ static InfantryTypeClass const C7(
 	true,							// Is this a "fraidycat" run-away type infantry?
 	false,						// Can this infantry type capture a building?
 	false,						// Theater specific graphic image?
+
+#ifdef VMSBIGOT_PREDATOR_MOD
+	false,						// Is the unit capable of cloaking?
+	false,						// Can unit fire while cloaked?
+#endif
+
 	10,							// Number of shots it has (default).
 	&CivilianDos7[0][0],		// ptr to DO table
 	2,								// Frame of projectile launch.
@@ -1175,6 +1337,12 @@ static InfantryTypeClass const C8(
 	true,							// Is this a "fraidycat" run-away type infantry?
 	false,						// Can this infantry type capture a building?
 	false,						// Theater specific graphic image?
+
+#ifdef VMSBIGOT_PREDATOR_MOD
+	false,						// Is the unit capable of cloaking?
+	false,						// Can unit fire while cloaked?
+#endif
+
 	0,								// Number of shots it has (default).
 	&CivilianDos8[0][0],		// ptr to DO table
 	2,								// Frame of projectile launch.
@@ -1250,6 +1418,12 @@ static InfantryTypeClass const C9(
 	true,							// Is this a "fraidycat" run-away type infantry?
 	false,						// Can this infantry type capture a building?
 	false,						// Theater specific graphic image?
+
+#ifdef VMSBIGOT_PREDATOR_MOD
+	false,						// Is the unit capable of cloaking?
+	false,						// Can unit fire while cloaked?
+#endif
+
 	0,								// Number of shots it has (default).
 	&CivilianDos9[0][0],		// ptr to DO table
 	2,								// Frame of projectile launch.
@@ -1327,6 +1501,12 @@ static InfantryTypeClass const C10(
 	true,							// Is this a "fraidycat" run-away type infantry?
 	false,						// Can this infantry type capture a building?
 	false,						// Theater specific graphic image?
+
+#ifdef VMSBIGOT_PREDATOR_MOD
+	false,						// Is the unit capable of cloaking?
+	false,						// Can unit fire while cloaked?
+#endif
+
 	0,								// Number of shots it has (default).
 	&NikoombaDos[0][0],		// ptr to DO table
 	2,								// Frame of projectile launch.
@@ -1401,6 +1581,12 @@ static InfantryTypeClass const Moebius(
 	true,							// Is this a "fraidycat" run-away type infantry?
 	false,						// Can this infantry type capture a building?
 	false,						// Theater specific graphic image?
+
+#ifdef VMSBIGOT_PREDATOR_MOD
+	false,						// Is the unit capable of cloaking?
+	false,						// Can unit fire while cloaked?
+#endif
+
 	0,								// Number of shots it has (default).
 	&MoebiusDos[0][0],		// ptr to DO table
 	0,								// Frame of projectile launch.
@@ -1475,6 +1661,12 @@ static InfantryTypeClass const Delphi(
 	true,							// Is this a "fraidycat" run-away type infantry?
 	false,						// Can this infantry type capture a building?
 	false,						// Theater specific graphic image?
+
+#ifdef VMSBIGOT_PREDATOR_MOD
+	false,						// Is the unit capable of cloaking?
+	false,						// Can unit fire while cloaked?
+#endif
+
 	10,							// Number of shots it has (default).
 	&DelphiDos[0][0],			// ptr to DO table
 	2,								// Frame of projectile launch.
@@ -1549,6 +1741,12 @@ static InfantryTypeClass const DrChan(
 	true,							// Is this a "fraidycat" run-away type infantry?
 	false,						// Can this infantry type capture a building?
 	false,						// Theater specific graphic image?
+
+#ifdef VMSBIGOT_PREDATOR_MOD
+	false,						// Is the unit capable of cloaking?
+	false,						// Can unit fire while cloaked?
+#endif
+
 	10,							// Number of shots it has (default).
 	&DrChanDos[0][0],			// ptr to DO table
 	2,								// Frame of projectile launch.
@@ -1586,6 +1784,11 @@ InfantryTypeClass const * const InfantryTypeClass::Pointers[INFANTRY_COUNT] = {
 //	&E6,
 	&E7,
 	&Commando,
+
+#ifdef VMSBIGOT_PREDATOR_MOD
+	&Predator,
+#endif
+
 	&C1,
 	&C2,
 	&C3,
@@ -1628,6 +1831,10 @@ InfantryTypeClass::InfantryTypeClass	(
 						bool is_fraidycat,
 						bool is_capture,
 						bool is_theater,
+#ifdef VMSBIGOT_PREDATOR_MOD
+						bool is_cloakable,
+						bool can_fire_cloaked,
+#endif
 						int ammo,
 						int *do_table,
 						int firelaunch, int pronelaunch,
@@ -1652,6 +1859,11 @@ InfantryTypeClass::InfantryTypeClass	(
 	Type = type;
 	FireLaunch = firelaunch;
 	ProneLaunch = pronelaunch;
+
+#ifdef VMSBIGOT_PREDATOR_MOD
+	IsCloakable = is_cloakable;
+	CanFireCloaked = can_fire_cloaked;
+#endif
 
 	/*
 	**	Set the animation sequence custom values.
